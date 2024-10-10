@@ -85,7 +85,7 @@ const Header = () => {
                   
                   {/* My Account */}
                   <div>
-                    <Link to="/signup">
+                    <Link to="/login">
                       <i className="fa fa-user-o"></i>
                       <span>My Account</span>
                     </Link>

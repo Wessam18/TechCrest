@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/homePage.jsx";
 import AboutUs from "./pages/AboutUS.jsx";
 import ContactUs from "./pages/contactUs.jsx";
-import Login from "./pages/loginPage.jsx";
 import Cart from "./pages/CartPage.jsx";
 import WishList from "./pages/wishlistPage.jsx";
 import BrandProducts from "./components/fetchEachBrand.jsx"; 
@@ -19,6 +18,7 @@ import Layout from "./components/layOut.jsx";
 import Signup from "./pages/signupPage.jsx";
 
 import React from 'react';
+import LoginPage from "./pages/loginPage.jsx";
 
 const App = () => {
   return (
@@ -28,7 +28,7 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="aboutus" element={<AboutUs />} />
           <Route path="contactus" element={<ContactUs />} />
-          <Route path="login" element={<Login />} />
+          <Route path="login" element={<LoginPage />} />
           <Route path="signup" element={< Signup />} />
           <Route path="cart" element={<Cart />} />
           <Route path="wishlist" element={<WishList />} />
