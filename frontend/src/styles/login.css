@@ -52,3 +52,9 @@
         width: 75%; /* Adjust for small screens */
     }
 }
+
+.text-danger, .text-success{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+}
