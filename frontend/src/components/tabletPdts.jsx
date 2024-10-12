@@ -1,6 +1,6 @@
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/productCard";
 import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import React from 'react';

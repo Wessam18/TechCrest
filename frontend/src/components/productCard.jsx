@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { useCart } from "../context/cart/cartContext.jsx";
+//import { useCart } from "../context/cart/cartContext.jsx";
 import IconButton from "@mui/material/IconButton";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
@@ -15,8 +15,6 @@ import React from 'react';
 
 
 export default function ProductCard({ _id, title, image1, price, type }) {
-  const { addItemToCart } = useCart();
-
   return (
     <Box
       sx={{

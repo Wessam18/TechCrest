@@ -1,6 +1,6 @@
 import express from 'express'
 import mongoose from 'mongoose'
-//import usersRoutes from './routes/userRoutes'
+import userRoute from './routes/userRoute.js'
 import laptopRoute from './routes/laptopRoute.js'
 import wearableRoute from './routes/wearableRoute.js'
 import accessoryRoute from './routes/accessoryRoute.js'
@@ -44,6 +44,7 @@ app.use('/accessory', accessoryRoute);
 app.use('/gaming', gamingRoute);
 app.use('/wearable', wearableRoute);
 app.use('/products', productRoute);
+app.use("/user", userRoute);
 
 
 

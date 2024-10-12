@@ -14,7 +14,7 @@ import WearablePage from "./components/wearablePdts.jsx";
 import ShopNow from "./components/shopNow.jsx";
 import TopSellingProducts from "./components/topSelling.jsx";
 import SearchResults from "./components/searchResults.jsx";
-import Layout from "./components/layOut.jsx";
+import Layout from "./components/Layout.jsx";
 import Signup from "./pages/signupPage.jsx";
 
 import React from 'react';
