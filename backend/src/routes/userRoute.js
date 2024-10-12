@@ -5,11 +5,10 @@ const router = express.Router();
 
 router.post("/register", async (request, response) => {
   try {
-    const { firstName, lastName, email, password } = request.body;
+    const { userName, email, password } = request.body;
     console.log(request.body);
     const { statusCode, data } = await register({
-      firstName,
-      lastName,
+      userName,
       email,
       password,
     });

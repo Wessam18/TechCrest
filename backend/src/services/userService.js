@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 
-export const register = async ({ firstName, lastName, email, password }) => {
+export const register = async ({ userName, email, password }) => {
   const findUser = await userModel.findOne({ email });
 
   if (findUser) {
@@ -14,12 +14,11 @@ export const register = async ({ firstName, lastName, email, password }) => {
   const newUser = new userModel({
     email,
     password: hashedPassword,
-    firstName,
-    lastName,
+    userName,
   });
   await newUser.save();
 
-  return { data: generateJWT({ firstName, lastName, email }), statusCode: 200 };
+  return { data: generateJWT({ userName, email }), statusCode: 200 };
 };
 
 export const login = async ({ email, password }) => {
@@ -34,8 +33,7 @@ export const login = async ({ email, password }) => {
     return {
       data: generateJWT({
         email,
-        firstName: findUser.firstName,
-        lastName: findUser.lastName,
+        userName: findUser.userName,
       }),
       statusCode: 200,
     };
