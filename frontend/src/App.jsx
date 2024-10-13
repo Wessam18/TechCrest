@@ -2,7 +2,12 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/homePage.jsx";
 import AboutUs from "./pages/AboutUS.jsx";
 import ContactUs from "./pages/contactUs.jsx";
+<<<<<<< HEAD
 import Login from "./pages/loginPage.jsx";
+=======
+import Cart from "./pages/CartPage.jsx";
+import WishList from "./pages/wishlistPage.jsx";
+>>>>>>> d0540ee90ac0113e73258ecae71d30bdbca8dc20
 import BrandProducts from "./components/fetchEachBrand.jsx"; 
 import LaptopPage from "./components/laptopPdts.jsx";
 import MobilePage from "./components/mobilePdts.jsx";
@@ -13,9 +18,10 @@ import WearablePage from "./components/wearablePdts.jsx";
 import ShopNow from "./components/shopNow.jsx";
 import TopSellingProducts from "./components/topSelling.jsx";
 import SearchResults from "./components/searchResults.jsx";
-import Layout from "./components/layOut.jsx";
+import Layout from "./components/Layout.jsx";
 import Signup from "./pages/signupPage.jsx";
 import React from 'react';
+<<<<<<< HEAD
 import WishlistPage from "./pages/wishlistPage.jsx";
 import CartPage from "./pages/CartPage.jsx";
 import CheckoutPage from "./pages/CheckoutPage.jsx";
@@ -26,6 +32,9 @@ import { useEffect,useState } from "react";
 import ProductsProvider from "./store/ProductsContext.jsx";
 import { CartContext } from "./context/cart/cartContext.jsx";
 
+=======
+import LoginPage from "./pages/loginPage.jsx";
+>>>>>>> d0540ee90ac0113e73258ecae71d30bdbca8dc20
 
 const App = () => {
   const [cart,setCart]=useState([]);
@@ -116,7 +125,7 @@ const removeFromCart = (product) => {
           <Route path="/" element={<HomePage />} />
           <Route path="aboutus" element={<AboutUs />} />
           <Route path="contactus" element={<ContactUs />} />
-          <Route path="login" element={<Login />} />
+          <Route path="login" element={<LoginPage />} />
           <Route path="signup" element={< Signup />} />
 
           <Route path="cart" element={<CartPage />} />

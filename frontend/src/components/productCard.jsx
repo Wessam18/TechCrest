@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { CartContext } from "../context/cart/cartContext.jsx";
+import { useCart } from "../context/cart/cartContext.jsx";
 import IconButton from "@mui/material/IconButton";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
@@ -21,15 +21,7 @@ import './App.css';
 
 
 export default function ProductCard({ _id, title, image1, price, type }) {
-  const{cart,wishlist,addToCart,addToWishlist, removeFromWishlist}=
-useContext(CartContext);
-const checkIfInWishlist = () => {
-const idx = wishlist.findIndex((item) => {
-return item.title === title;
-});
- return idx > -1;
-  }; 
-
+  const { addItemToCart } = useCart();
 
   return (
     <Box
