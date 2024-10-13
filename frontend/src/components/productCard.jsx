@@ -4,25 +4,17 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { useCart } from "../context/cart/cartContext.jsx";
+//import { useCart } from "../context/cart/cartContext.jsx";
 import IconButton from "@mui/material/IconButton";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Box } from "@mui/material";
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import Stack from 'react-bootstrap/esm/Stack';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
-
-
+import React from 'react';
 
 
 export default function ProductCard({ _id, title, image1, price, type }) {
-  const { addItemToCart } = useCart();
-
   return (
     <Box
       sx={{
@@ -128,10 +120,31 @@ export default function ProductCard({ _id, title, image1, price, type }) {
                   "&:hover .icon-button": { color: "#D10024" },
                 }}
               >
-                
-                {/* <IconButton className="icon-button" sx={{ fontSize: "large" }}>
+                <Typography
+                  className="icon-text"
+                  variant="caption"
+                  component="div"
+                  sx={{
+                    fontSize: "14px", // Increased font size for text
+                    transition: "opacity 0.3s, transform 0.3s",
+                    opacity: 0,
+                    position: "absolute",
+                    bottom: "100%", // Position text above the icon
+                    left: "50%",
+                    transform: "translate(-50%, -8px)", // Adjust the vertical position above the icon
+                    whiteSpace: "nowrap", // Prevents text from wrapping
+                    zIndex: 1, // Ensure text appears above other elements
+                    backgroundColor: "black", // Black background
+                    color: "white", // White text color
+                    padding: "2px 5px", // Padding around the text
+                    borderRadius: "4px", // Rounded corners for the background
+                  }}
+                >
+                  {text}
+                </Typography>
+                <IconButton className="icon-button" sx={{ fontSize: "large" }}>
                   {icon}
-                </IconButton> */}
+                </IconButton>
               </Box>
             ))}
           </Box>
@@ -145,33 +158,21 @@ export default function ProductCard({ _id, title, image1, price, type }) {
             justifyContent: "center",
           }}
         >
-    <Stack gap={3}>
-    <br/>
-   <Button 
-   sx={{color:"white", backgroundColor:"#D10024"}} onClick={()=>{
-    const ProductDetails={title, image1, price, type }
-   addToCart(ProductDetails)
-   }}>Add To Cart</Button>
-
-
-{checkIfInWishlist() ? (
-  <Button sx={{ color: "white", backgroundColor: "#2E7D32" }}
-  onClick={()=>{
-    const ProductDetails={title, image1, price, type }
-   removeFromWishlist(ProductDetails);
-   }}
-   >
-    Remove From Wishlist
-     </Button>
-   ):(
-    <Button sx={{color:"white", backgroundColor:"#D10024"}}  onClick={()=>{
-      const ProductDetails={title, image1, price, type };
-     addToWishlist(ProductDetails)
-     }}>Add To whishlist
-     </Button>
-   )}
-     </Stack>
-
+          <Button
+            variant="contained"
+            size="small"
+            sx={{
+              backgroundColor: "#D10024",
+              fontWeight: "bold",
+              borderRadius: "5px",
+              width: "100%",
+              "&:hover": { backgroundColor: "#a8001b" },
+            }}
+            onClick={() => addItemToCart(_id)}
+            startIcon={<ShoppingCartIcon />}
+          >
+            Add to Cart
+          </Button>
         </CardActions>
       </Card>
     </Box>

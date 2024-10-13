@@ -1,16 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
+import "../styles/Header.css"; // Link to your CSS file (optional)
 import { Link, useNavigate } from 'react-router-dom';
 import SearchDropdown from './searchDropDown.jsx'; // Import the dropdown component
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Badge from 'react-bootstrap/Badge';
-import './App.css' ;
-import { CartContext } from '../context/cart/cartContext.jsx';
-import "../styles/Header.css"; // Link to your CSS file (optional)
-
 
 const Header = () => {
-  const{cart,addToCart,wishlist}=useContext(CartContext);
-
   const [searchTerm, setSearchTerm] = useState(''); // For managing the search input
   const [showDropdown, setShowDropdown] = useState(false); // For showing the dropdown
   const navigate = useNavigate(); // Hook to programmatically navigate
@@ -76,8 +69,7 @@ const Header = () => {
                   <div>
                     <Link to="/wishlist">
                       <i className="fa fa-heart-o"></i>
-                      <span>Wishlist{" "} <Badge bg="danger">{wishlist.length}</Badge>
-                      </span>
+                      <span>Your Wishlist</span>
                     </Link>
                   </div>
                   {/* /Wishlist */}
@@ -86,8 +78,7 @@ const Header = () => {
                   <div className="dropdown">
                     <Link to="/cart">
                       <i className="fa fa-shopping-cart"></i>
-                      <span>Cart{" "} <Badge bg="danger">{cart.length}</Badge>
-                      </span>
+                      <span>Your Cart</span>
                     </Link>
                   </div>
                   {/* /Cart */}

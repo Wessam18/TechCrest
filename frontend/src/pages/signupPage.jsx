@@ -55,7 +55,7 @@ const SignupPage = () => {
         return;
       }
 
-      const { token } = await response.json();
+      const  token  = await response.json();
 
       if (!token) {
         setError("Incorrect token received.");
