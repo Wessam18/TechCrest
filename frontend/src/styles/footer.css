@@ -1,0 +1,42 @@
+.custom-bg {
+    background-color: rgb(7, 4, 16);
+  }
+  footer {
+    margin-top: auto;
+  }
+
+  .custom-bg {
+    background-color: rgb(7, 4, 16);
+    padding: 1rem; /* Adjust the padding for height */
+}
+
+footer {
+    margin-top: auto;
+}
+
+.flex {
+    display: flex; /* Flexbox to align items */
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    flex-wrap: wrap; /* Allow wrapping if needed */
+}
+
+.btn-floating {
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    width: 40px; /* Set a width for the icon container */
+    height: 40px; /* Set a height for the icon container */
+    border: 2px solid white; /* Add border around the icons */
+    border-radius: 50%; /* Make it circular */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.btn-floating:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Optional hover effect */
+}
+
+.text-center {
+    text-align: center; /* Center text */
+    margin-top: 0px; /* Add some space above the text */
+}
