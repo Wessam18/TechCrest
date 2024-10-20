@@ -14,9 +14,10 @@ import TopSellingProducts from "./components/topSelling.jsx";
 import SearchResults from "./components/searchResults.jsx";
 import Layout from "./components/Layout.jsx";
 import Signup from "./pages/signupPage.jsx";
-
 import React from 'react';
 import LoginPage from "./pages/loginPage.jsx";
+import CartPage from "./pages/cartPage.jsx";
+import WishlistPage from "./pages/wishlistPage.jsx";
 
 const App = () => {
   return (
@@ -38,6 +39,8 @@ const App = () => {
           <Route path="topselling" element={<TopSellingProducts />} />
           <Route path="/search" element={<SearchResults />} />
           <Route path="products/:brandName" element={<BrandProducts />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/wishlist" element={<WishlistPage />} />
         </Route>
       </Routes>
     </Router>
