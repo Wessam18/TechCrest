@@ -114,9 +114,7 @@ body {
     border-radius: 40px 0px 0px 40px;
   }
   
-  #form {
-    width: 690px;
-  }
+  
   .header-search form .input {
     width: calc(100% - 260px);
     margin-right: -4px;
@@ -199,6 +197,9 @@ body {
     font-size: 20px;
     padding-left: 250px;
     
+  }
+  .header-ctn li.nav-toggle {
+    display: none;
   }
   
   /*----------------------------*\
@@ -417,3 +418,44 @@ body {
       max-height: 80px;
     }
   }
+
+  @media only screen and (max-width: 991px) {
+    .header-ctn .menu-toggle {
+      display: inline-block;
+    }
+  }
+
+  .header-ctn .menu-toggle {
+    display: none;
+  }
+
+  /*=========================================================
+	13 -> RESPONSIVE
+===========================================================*/
+
+@media only screen and (max-width: 1201px) {}
+
+@media only screen and (max-width: 991px) {
+  .header-links.pull-left {
+    float: none !important;
+  }
+  .header-links.pull-right {
+    float: none !important;
+    margin-top: 5px;
+  }
+  .header-logo {
+    float: none;
+    text-align: center;
+  }
+  .header-logo .logo {
+    display: inline-block;
+  }
+}
+
+
+
+@media only screen and (max-width: 480px) {
+  [class*='col-xs'] {
+    width: 100%;
+  }
+}

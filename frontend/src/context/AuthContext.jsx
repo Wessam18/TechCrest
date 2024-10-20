@@ -16,12 +16,13 @@ const TOKEN_KEY = "token";
 const AuthProvider = ({ children }) => {
   const [username, setUsername] = useState(localStorage.getItem(USERNAME_KEY));
   const [token, setToken] = useState(localStorage.getItem(TOKEN_KEY));
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
-  const isAuthenticated = !!token;
 
   const login = (username, token) => {
     setUsername(username);
     setToken(token);
+    setIsAuthenticated(true)
     localStorage.setItem(USERNAME_KEY, username);
     localStorage.setItem(TOKEN_KEY, token);
   };
@@ -31,6 +32,7 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem(TOKEN_KEY);
     setUsername(null);
     setToken(null);
+    setIsAuthenticated(false)
   };
 
   return (

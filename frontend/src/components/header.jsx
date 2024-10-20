@@ -70,6 +70,7 @@ const Header = () => {
                     <Link to="/wishlist">
                       <i className="fa fa-heart-o"></i>
                       <span>Your Wishlist</span>
+                      <div class="qty">2</div>
                     </Link>
                   </div>
                   {/* /Wishlist */}
@@ -82,6 +83,14 @@ const Header = () => {
                     </Link>
                   </div>
                   {/* /Cart */}
+                  {/* Menu Toogle */}
+								<div class="menu-toggle">
+									<a href="#">
+										<i class="fa fa-bars"></i>
+										<span>Menu</span>
+									</a>
+								</div>
+								{/* /Menu Toogle */}
                   
                   {/* My Account */}
                   <div>

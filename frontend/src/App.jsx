@@ -18,32 +18,41 @@ import React from 'react';
 import LoginPage from "./pages/loginPage.jsx";
 import CartPage from "./pages/cartPage.jsx";
 import WishlistPage from "./pages/wishlistPage.jsx";
+import ProtectedRoute  from "./components/protectedRoute.jsx";
+import AuthProvider from "./context/AuthContext.jsx";
+import CartProvider from "./context/cartContext.jsx";
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="aboutus" element={<AboutUs />} />
-          <Route path="contactus" element={<ContactUs />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="signup" element={< Signup />} />
-          <Route path="laptop" element={<LaptopPage />} />
-          <Route path="mobile" element={<MobilePage />} />
-          <Route path="tablet" element={<TabletPage />} />
-          <Route path="gaming" element={<GamingPage />} />
-          <Route path="wearable" element={<WearablePage />} />
-          <Route path="accessory" element={<AccessoriesPage />} />
-          <Route path="/shopnow" element={<ShopNow />} />
-          <Route path="topselling" element={<TopSellingProducts />} />
-          <Route path="/search" element={<SearchResults />} />
-          <Route path="products/:brandName" element={<BrandProducts />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/wishlist" element={<WishlistPage />} />
-        </Route>
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <CartProvider>
+        <Router>
+          <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route path="/" element={<HomePage />} />
+                <Route path="aboutus" element={<AboutUs />} />
+                <Route path="contactus" element={<ContactUs />} />
+                <Route path="login" element={<LoginPage />} />
+                <Route path="signup" element={< Signup />} />
+                <Route path="laptop" element={<LaptopPage />} />
+                <Route path="mobile" element={<MobilePage />} />
+                <Route path="tablet" element={<TabletPage />} />
+                <Route element={<ProtectedRoute />}>
+                  <Route path="/cart" element={<CartPage />} />
+                  <Route path="/wishlist" element={<WishlistPage />} />
+                </Route>
+                <Route path="gaming" element={<GamingPage />} />
+                <Route path="wearable" element={<WearablePage />} />
+                <Route path="accessory" element={<AccessoriesPage />} />
+                <Route path="/shopnow" element={<ShopNow />} />
+                <Route path="topselling" element={<TopSellingProducts />} />
+                <Route path="/search" element={<SearchResults />} />
+                <Route path="products/:brandName" element={<BrandProducts />} />
+              </Route>
+          </Routes>
+        </Router>
+      </CartProvider>
+    </AuthProvider>
   );
 };
 
