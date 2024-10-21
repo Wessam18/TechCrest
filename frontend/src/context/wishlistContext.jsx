@@ -5,7 +5,11 @@ export const wishlistContext = createContext();
 
 export const WishlistProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
-  const [wishlistItems, setWishlistItems] = useState([]);
+  const [wishlistItems, setWishlistItems] = useState(() => {
+    // Load wishlist items from local storage if available
+    const savedWishlist = localStorage.getItem("wishlistItems");
+    return savedWishlist ? JSON.parse(savedWishlist) : [];
+  });
 
   // Function to update products from the backend
   const updateProducts = (newProducts) => {
@@ -16,18 +20,28 @@ export const WishlistProvider = ({ children }) => {
     setWishlistItems((prevItems) => {
       const existingItem = prevItems.find((item) => item._id === _id);
       if (!existingItem) {
-        return [...prevItems, { _id, title, price, image1 }];
+        const updatedWishlist = [...prevItems, { _id, title, price, image1 }];
+        // Save to local storage
+        localStorage.setItem("wishlistItems", JSON.stringify(updatedWishlist));
+        return updatedWishlist;
       }
       return prevItems;
     });
   };
 
   const removeFromWishlist = (_id) => {
-    setWishlistItems((prevItems) => prevItems.filter(item => item._id !== _id));
+    setWishlistItems((prevItems) => {
+      const updatedWishlist = prevItems.filter(item => item._id !== _id);
+      // Save to local storage
+      localStorage.setItem("wishlistItems", JSON.stringify(updatedWishlist));
+      return updatedWishlist;
+    });
   };
 
   const clearWishlist = () => {
     setWishlistItems([]);
+    // Clear local storage
+    localStorage.removeItem("wishlistItems");
   };
 
   // Fetch products from the backend when the component mounts

@@ -3,9 +3,13 @@ import axios from "axios";
 
 export const cartContext = createContext();
 
-export const cartProvider = ({ children }) => {
+export const CartProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
-  const [cartItems, setCartItems] = useState([]); // Change to an array
+  const [cartItems, setCartItems] = useState(() => {
+    // Load cart items from local storage if available
+    const savedCart = localStorage.getItem("cartItems");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
 
   // Function to update products from the backend
   const updateProducts = (newProducts) => {
@@ -15,38 +19,55 @@ export const cartProvider = ({ children }) => {
   const addToCart = (_id, title, price, image1) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item._id === _id);
+      let updatedItems;
       if (existingItem) {
-        return prevItems.map((item) =>
+        updatedItems = prevItems.map((item) =>
           item._id === _id ? { ...item, quantity: item.quantity + 1 } : item
         );
       } else {
-        return [...prevItems, { _id, title, price, image1, quantity: 1 }];
+        updatedItems = [...prevItems, { _id, title, price, image1, quantity: 1 }];
       }
+      // Save to local storage
+      localStorage.setItem("cartItems", JSON.stringify(updatedItems));
+      return updatedItems;
     });
   };
 
   const increaseQuantity = (_id) => {
-    setCartItems((prevItems) => 
-      prevItems.map((item) =>
+    setCartItems((prevItems) => {
+      const updatedItems = prevItems.map((item) =>
         item._id === _id ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
+      );
+      // Save to local storage
+      localStorage.setItem("cartItems", JSON.stringify(updatedItems));
+      return updatedItems;
+    });
   };
-  
+
   const decreaseQuantity = (_id) => {
-    setCartItems((prevItems) => 
-      prevItems.map((item) =>
+    setCartItems((prevItems) => {
+      const updatedItems = prevItems.map((item) =>
         item._id === _id && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
-      )
-    );
+      );
+      // Save to local storage
+      localStorage.setItem("cartItems", JSON.stringify(updatedItems));
+      return updatedItems;
+    });
   };
 
   const removeFromCart = (_id) => {
-    setCartItems((prevItems) => prevItems.filter(item => item._id !== _id));
+    setCartItems((prevItems) => {
+      const updatedItems = prevItems.filter(item => item._id !== _id);
+      // Save to local storage
+      localStorage.setItem("cartItems", JSON.stringify(updatedItems));
+      return updatedItems;
+    });
   };
 
   const clearCart = () => {
     setCartItems([]);
+    // Clear local storage
+    localStorage.removeItem("cartItems");
   };
 
   // Fetch products from the backend when the component mounts
@@ -70,4 +91,4 @@ export const cartProvider = ({ children }) => {
   );
 };
 
-export default cartProvider;
+export default CartProvider;
