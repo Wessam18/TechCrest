@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-
+import '../styles/wishlist.css'; // assuming your styles are in the same folder
 import { wishlistContext } from "../context/wishlistContext"; // Make sure the path is correct
 import { cartContext } from "../context/cartContext"; // Import cart context
 import Card from "@mui/material/Card";
@@ -16,12 +16,6 @@ const WishlistPage = () => {
   const { wishlistItems, removeFromWishlist, clearWishlist } = useContext(wishlistContext);
   const { addToCart } = useContext(cartContext); // Use cart context to add to cart
 
-  // Function to count total items in the wishlist
-  const countWishlistItems = () => {
-    return wishlistItems.reduce((acc, item) => acc + (item.quantity || 1), 0);
-  };
-
-
   return (
     <Box sx={{ padding: "20px" }}>
       <Typography variant="h4" sx={{ fontWeight: "bold" }} gutterBottom>
@@ -32,9 +26,9 @@ const WishlistPage = () => {
           Your wishlist is empty. <Link to="/">Go back to shop</Link>
         </Typography>
       ) : (
-        <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+        <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start" }}>
           {wishlistItems.map((item) => (
-            <Box key={item._id} sx={{ margin: "20px", maxWidth: "320px" }}>
+            <Box key={item._id} className="wishlist-item">
               <Card
                 sx={{
                   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
@@ -55,9 +49,7 @@ const WishlistPage = () => {
                   component="img"
                 />
                 <CardContent sx={{ padding: "15px", flexGrow: 1 }}>
-                  <Typography variant="body2" color="text.secondary" sx={{ fontSize: "12px", marginBottom: "10px" }}>
-                    {/* Add any type or category if available */}
-                  </Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ fontSize: "12px", marginBottom: "10px" }} />
                   <Typography
                     gutterBottom
                     variant="h6"

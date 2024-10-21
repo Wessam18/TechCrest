@@ -1,0 +1,18 @@
+/* wishlist.css */
+.wishlist-item {
+    margin: 10px;
+    width: calc(25% - 20px); /* Default width for larger screens */
+  }
+  
+  @media (max-width: 768px) {
+    .wishlist-item {
+      width: calc(50% - 20px); /* Two items per row on tablets */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .wishlist-item {
+      width: calc(100% - 20px); /* One item per row on mobile devices */
+    }
+  }
+  
