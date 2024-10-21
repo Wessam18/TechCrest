@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react'; // Import useContext
 import "../styles/Header.css"; // Link to your CSS file (optional)
 import { Link, useNavigate } from 'react-router-dom';
 import SearchDropdown from './searchDropDown.jsx'; // Import the dropdown component
+import { cartContext } from '../context/cartContext.jsx';
 
 const Header = () => {
+  const { cartItems } = useContext(cartContext); // Call useContext here
   const [searchTerm, setSearchTerm] = useState(''); // For managing the search input
   const [showDropdown, setShowDropdown] = useState(false); // For showing the dropdown
   const navigate = useNavigate(); // Hook to programmatically navigate
@@ -70,7 +72,6 @@ const Header = () => {
                     <Link to="/wishlist">
                       <i className="fa fa-heart-o"></i>
                       <span>Your Wishlist</span>
-                      <div class="qty">2</div>
                     </Link>
                   </div>
                   {/* /Wishlist */}
@@ -80,18 +81,10 @@ const Header = () => {
                     <Link to="/cart">
                       <i className="fa fa-shopping-cart"></i>
                       <span>Your Cart</span>
+                      <div className="qty">{cartItems.reduce((acc, item) => acc + item.quantity, 0)}</div>
                     </Link>
                   </div>
                   {/* /Cart */}
-                  {/* Menu Toogle */}
-								<div class="menu-toggle">
-									<a href="#">
-										<i class="fa fa-bars"></i>
-										<span>Menu</span>
-									</a>
-								</div>
-								{/* /Menu Toogle */}
-                  
                   {/* My Account */}
                   <div>
                     <Link to="/login">

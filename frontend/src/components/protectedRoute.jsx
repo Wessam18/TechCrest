@@ -5,7 +5,6 @@ const ProtectedRoute = () => {
   const { isAuthenticated } = useAuth();
 
 
-  console.log("ProtectedRoute isAuthenticated:", isAuthenticated);
 
   // If user is not authenticated, redirect to login page
   if (!isAuthenticated) {

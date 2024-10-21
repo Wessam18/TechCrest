@@ -1,20 +1,21 @@
+import React, { useContext } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-//import { useCart } from "../context/cart/cartContext.jsx";
 import IconButton from "@mui/material/IconButton";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Box } from "@mui/material";
-import React from 'react';
-
+import { cartContext } from "../context/cartContext"; // Import context
 
 export default function ProductCard({ _id, title, image1, price, type }) {
+  const { addToCart } = useContext(cartContext); // Use context to add to cart
+
   return (
     <Box
       sx={{
@@ -94,20 +95,8 @@ export default function ProductCard({ _id, title, image1, price, type }) {
               marginTop: "10px",
             }}
           >
-            {[
-              {
-                icon: <FavoriteBorderIcon fontSize="large" />,
-                text: "add to wishlist",
-              },
-              {
-                icon: <CompareArrowsIcon fontSize="large" />,
-                text: "add to compare",
-              },
-              {
-                icon: <VisibilityIcon fontSize="large" />,
-                text: "quick view",
-              },
-            ].map(({ icon, text }, idx) => (
+            {/* Icon buttons */}
+            {[{ icon: <FavoriteBorderIcon fontSize="large" />, text: "add to wishlist" }, { icon: <CompareArrowsIcon fontSize="large" />, text: "add to compare" }, { icon: <VisibilityIcon fontSize="large" />, text: "quick view" }].map(({ icon, text }, idx) => (
               <Box
                 key={idx}
                 sx={{
@@ -125,19 +114,19 @@ export default function ProductCard({ _id, title, image1, price, type }) {
                   variant="caption"
                   component="div"
                   sx={{
-                    fontSize: "14px", // Increased font size for text
+                    fontSize: "14px",
                     transition: "opacity 0.3s, transform 0.3s",
                     opacity: 0,
                     position: "absolute",
-                    bottom: "100%", // Position text above the icon
+                    bottom: "100%",
                     left: "50%",
-                    transform: "translate(-50%, -8px)", // Adjust the vertical position above the icon
-                    whiteSpace: "nowrap", // Prevents text from wrapping
-                    zIndex: 1, // Ensure text appears above other elements
-                    backgroundColor: "black", // Black background
-                    color: "white", // White text color
-                    padding: "2px 5px", // Padding around the text
-                    borderRadius: "4px", // Rounded corners for the background
+                    transform: "translate(-50%, -8px)",
+                    whiteSpace: "nowrap",
+                    zIndex: 1,
+                    backgroundColor: "black",
+                    color: "white",
+                    padding: "2px 5px",
+                    borderRadius: "4px",
                   }}
                 >
                   {text}
@@ -168,7 +157,11 @@ export default function ProductCard({ _id, title, image1, price, type }) {
               width: "100%",
               "&:hover": { backgroundColor: "#a8001b" },
             }}
-            onClick={() => addItemToCart(_id)}
+            onClick={() => {
+                console.log("Add to Cart clicked for product:", _id);
+                addToCart(_id, title, price);}} // Pass title and price along with _id
+              
+
             startIcon={<ShoppingCartIcon />}
           >
             Add to Cart
