@@ -13,6 +13,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Box } from "@mui/material";
 import { cartContext } from "../context/cartContext"; // Import cart context
 import { wishlistContext } from "../context/wishlistContext"; // Import wishlist context
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 
 export default function ProductCard({ _id, title, image1, price, type }) {
   const { addToCart } = useContext(cartContext); // Use cart context to add to cart
@@ -66,11 +67,12 @@ export default function ProductCard({ _id, title, image1, price, type }) {
             {type}
           </Typography>
 
+          {/* Wrap the title in Link to navigate to the single product page */}
           <Typography
             gutterBottom
             variant="h6"
-            component="a"
-            href="#"
+            component={Link}
+            to={`/product/${_id}`} // Add Link to the product details page
             sx={{
               textDecoration: "none",
               color: "#333",
@@ -79,6 +81,7 @@ export default function ProductCard({ _id, title, image1, price, type }) {
               WebkitLineClamp: 2,
               WebkitBoxOrient: "vertical",
               overflow: "hidden",
+              "&:hover": { color: "#D10024" }, // Add hover effect to change title color
             }}
           >
             {title}
@@ -98,7 +101,7 @@ export default function ProductCard({ _id, title, image1, price, type }) {
             }}
           >
             {/* Icon buttons */}
-            {[{ icon: <FavoriteBorderIcon fontSize="large" />, text: "Add to wishlist", action: () => addToWishlist(_id, title, price, image1) }, { icon: <CompareArrowsIcon fontSize="large" />, text: "Add to compare" }, { icon: <VisibilityIcon fontSize="large" />, text: "Quick view" }].map(({ icon, text, action }, idx) => (
+            {[{ icon: <FavoriteBorderIcon fontSize="large" />, text: "Add to wishlist", action: () => addToWishlist(_id, title, price, image1) }, { icon: <CompareArrowsIcon fontSize="large" />, text: "Add to compare" }, { icon: <VisibilityIcon fontSize="large" />, text: "view" }].map(({ icon, text, action }, idx) => (
               <Box
                 key={idx}
                 sx={{

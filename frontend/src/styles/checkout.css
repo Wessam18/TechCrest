@@ -1,0 +1,13 @@
+.custom-radio .form-check-input {
+    border: 1px solid black; /* Black border */
+    border-radius: 50%; /* Keep the circular shape */
+    width: 20px; /* Increase width for better visibility */
+    height: 20px; /* Increase height for better visibility */
+    appearance: none; /* Remove default styling */
+  }
+  
+  .custom-radio .form-check-input:checked {
+    background-color: #dc3545;; /* Background color when checked */
+    border: 1px solid #dc3545;; /* Change border color when checked */
+  }
+  

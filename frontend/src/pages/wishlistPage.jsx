@@ -1,34 +1,29 @@
 import React, { useContext } from "react";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import '../styles/wishlist.css'; // assuming your styles are in the same folder
-import { wishlistContext } from "../context/wishlistContext"; // Make sure the path is correct
+import { wishlistContext } from "../context/wishlistContext"; // Ensure the path is correct
 import { cartContext } from "../context/cartContext"; // Import cart context
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import { Box } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Box, Grid, Typography, Button, Card, CardActions, CardContent, CardMedia } from "@mui/material";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 
 const WishlistPage = () => {
   const { wishlistItems, removeFromWishlist, clearWishlist } = useContext(wishlistContext);
   const { addToCart } = useContext(cartContext); // Use cart context to add to cart
 
   return (
-    <Box sx={{ padding: "20px" }}>
+    <Box sx={{ padding: "75px" }}>
       <Typography variant="h4" sx={{ fontWeight: "bold" }} gutterBottom>
         Wishlist
       </Typography>
       {wishlistItems.length === 0 ? (
-        <Typography variant="body1">
-          Your wishlist is empty. <Link to="/">Go back to shop</Link>
-        </Typography>
+        <Box sx={{ textAlign: "center", marginTop: "20px" }}>
+          <Typography variant="body1">
+            Your wishlist is empty. <Link to="/">Go back to shop</Link>
+          </Typography>
+        </Box>
       ) : (
-        <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start" }}>
+        <Grid container spacing={2}>
           {wishlistItems.map((item) => (
-            <Box key={item._id} className="wishlist-item">
+            <Grid item xs={12} sm={6} md={4} key={item._id}>
               <Card
                 sx={{
                   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
@@ -49,7 +44,6 @@ const WishlistPage = () => {
                   component="img"
                 />
                 <CardContent sx={{ padding: "15px", flexGrow: 1 }}>
-                  <Typography variant="body2" color="text.secondary" sx={{ fontSize: "12px", marginBottom: "10px" }} />
                   <Typography
                     gutterBottom
                     variant="h6"
@@ -112,24 +106,29 @@ const WishlistPage = () => {
                   </Button>
                 </CardActions>
               </Card>
-            </Box>
+            </Grid>
           ))}
-          <Box sx={{ display: "flex", justifyContent: "space-between", marginTop: "20px", width: "100%" }}>
+          <Grid item xs={12} sx={{ marginTop: "20px" }}>
             <Button
               variant="contained"
-              size="small"
+              size="small" // Set size back to small
               sx={{
                 backgroundColor: "#D10024",
                 fontWeight: "bold",
                 borderRadius: "5px",
+                marginTop: "40px",
+                paddingTop: "10px", 
+                width: "100%", // Full width for the button
+                marginLeft: "10px", // Add left margin
+                marginRight: "10px", // Add right margin
                 "&:hover": { backgroundColor: "#a8001b" },
               }}
               onClick={clearWishlist}
             >
               Clear Wishlist
             </Button>
-          </Box>
-        </Box>
+          </Grid>
+        </Grid>
       )}
     </Box>
   );

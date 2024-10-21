@@ -22,12 +22,17 @@ import ProtectedRoute  from "./components/protectedRoute.jsx";
 import AuthProvider from "./context/AuthContext.jsx";
 import CartProvider from "./context/cartContext.jsx";
 import WishlistProvider from "./context/wishlistContext.jsx";
+import SingleProductPage from "./pages/SingleProductPage"; // Import SingleProductPage
+import SingleProductProvider from "./context/SingleProductContext"; // Import the provider
+import Checkout from "./pages/CheckoutPage.jsx";
+
 
 const App = () => {
   return (
     <AuthProvider>
       <CartProvider>
         <WishlistProvider>
+          <SingleProductProvider>
           <Router>
             <Routes>
                 <Route path="/" element={<Layout />}>
@@ -39,9 +44,11 @@ const App = () => {
                   <Route path="laptop" element={<LaptopPage />} />
                   <Route path="mobile" element={<MobilePage />} />
                   <Route path="tablet" element={<TabletPage />} />
+                  <Route path="/product/:productId" element={<SingleProductPage />} /> {/* Add SingleProductPage route */}
                   <Route element={<ProtectedRoute />}>
                     <Route path="/cart" element={<CartPage />} />
                     <Route path="/wishlist" element={<WishlistPage />} />
+                    <Route path="/checkout" element={<Checkout />} />
                   </Route>
                   <Route path="gaming" element={<GamingPage />} />
                   <Route path="wearable" element={<WearablePage />} />
@@ -53,6 +60,7 @@ const App = () => {
                 </Route>
             </Routes>
           </Router>
+          </SingleProductProvider>
         </WishlistProvider>
       </CartProvider>
     </AuthProvider>
