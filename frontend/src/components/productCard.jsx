@@ -11,10 +11,12 @@ import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Box } from "@mui/material";
-import { cartContext } from "../context/cartContext"; // Import context
+import { cartContext } from "../context/cartContext"; // Import cart context
+import { wishlistContext } from "../context/wishlistContext"; // Import wishlist context
 
 export default function ProductCard({ _id, title, image1, price, type }) {
-  const { addToCart } = useContext(cartContext); // Use context to add to cart
+  const { addToCart } = useContext(cartContext); // Use cart context to add to cart
+  const { addToWishlist } = useContext(wishlistContext); // Use wishlist context to add to wishlist
 
   return (
     <Box
@@ -28,13 +30,13 @@ export default function ProductCard({ _id, title, image1, price, type }) {
       <Card
         sx={{
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-          border: "1px solid transparent", // Default border transparent
+          border: "1px solid transparent",
           display: "flex",
           flexDirection: "column",
           height: "100%",
-          transition: "border 0.3s ease", // Transition for border on hover
+          transition: "border 0.3s ease",
           "&:hover": {
-            border: "2px solid #D10024", // Change to your desired color on hover
+            border: "2px solid #D10024",
           },
         }}
       >
@@ -96,7 +98,7 @@ export default function ProductCard({ _id, title, image1, price, type }) {
             }}
           >
             {/* Icon buttons */}
-            {[{ icon: <FavoriteBorderIcon fontSize="large" />, text: "add to wishlist" }, { icon: <CompareArrowsIcon fontSize="large" />, text: "add to compare" }, { icon: <VisibilityIcon fontSize="large" />, text: "quick view" }].map(({ icon, text }, idx) => (
+            {[{ icon: <FavoriteBorderIcon fontSize="large" />, text: "Add to wishlist", action: () => addToWishlist(_id, title, price, image1) }, { icon: <CompareArrowsIcon fontSize="large" />, text: "Add to compare" }, { icon: <VisibilityIcon fontSize="large" />, text: "Quick view" }].map(({ icon, text, action }, idx) => (
               <Box
                 key={idx}
                 sx={{
@@ -131,7 +133,11 @@ export default function ProductCard({ _id, title, image1, price, type }) {
                 >
                   {text}
                 </Typography>
-                <IconButton className="icon-button" sx={{ fontSize: "large" }}>
+                <IconButton 
+                  className="icon-button" 
+                  sx={{ fontSize: "large" }} 
+                  onClick={action} // Call the action when the icon button is clicked
+                >
                   {icon}
                 </IconButton>
               </Box>
@@ -159,9 +165,8 @@ export default function ProductCard({ _id, title, image1, price, type }) {
             }}
             onClick={() => {
                 console.log("Add to Cart clicked for product:", _id);
-                addToCart(_id, title, price);}} // Pass title and price along with _id
-              
-
+                addToCart(_id, title, price, image1);
+            }}
             startIcon={<ShoppingCartIcon />}
           >
             Add to Cart
