@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useEffect, useState, useContext } from 'react';
+import { useLocation, Link } from 'react-router-dom'; // Import Link
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
@@ -14,16 +14,21 @@ import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Box from '@mui/material/Box';
-import React from 'react';
-
+import { cartContext } from '../context/cartContext'; // Import cart context
+import { wishlistContext } from '../context/wishlistContext'; // Import wishlist context
 
 const ShopNow = () => {
   const location = useLocation();
   const deal = location.state?.deal || null;
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true); // Loading state
 
-  // Fetch products from an API or use a static array
+  // Access cart and wishlist contexts
+  const { addToCart } = useContext(cartContext);
+  const { addToWishlist } = useContext(wishlistContext);
+
+  // Fetch products from an API
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -32,6 +37,8 @@ const ShopNow = () => {
         setProducts(data);
       } catch {
         setError(true);
+      } finally {
+        setLoading(false); // Set loading to false after fetching
       }
     };
 
@@ -44,11 +51,9 @@ const ShopNow = () => {
     return price - (price * discountPercentage) / 100;
   };
 
-  // Handle add to cart
-  const handleAddToCart = (productId) => {
-    // Logic to add the product to cart (e.g., API call or context state update)
-    console.log(`Added product ${productId} to cart`);
-  };
+  if (loading) {
+    return <div>Loading products...</div>; // Loading message
+  }
 
   if (error) {
     return <div>Something went wrong, please try again!</div>;
@@ -107,23 +112,23 @@ const ShopNow = () => {
                     justifyContent: 'space-between',
                   }}
                 >
-                  <Typography
-                    gutterBottom
-                    variant="h6"
-                    component="a"
-                    href="#"
-                    sx={{
-                      textDecoration: 'none',
-                      color: '#333',
-                      fontWeight: 'bold',
-                      display: '-webkit-box',
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: 'vertical',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    {product.title}
-                  </Typography>
+                  <Link to={`/product/${product._id}`} style={{ textDecoration: 'none' }}> {/* Link for product title */}
+                    <Typography
+                      gutterBottom
+                      variant="h6"
+                      component="div"
+                      sx={{
+                        color: '#333',
+                        fontWeight: 'bold',
+                        display: '-webkit-box',
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden',
+                      }}
+                    >
+                      {product.title}
+                    </Typography>
+                  </Link>
 
                   <Typography color="textSecondary">
                     Original Price: {product.price.toFixed(2)} EGP
@@ -147,11 +152,11 @@ const ShopNow = () => {
                       marginTop: "10px",
                     }}
                   >
-                    {[  
-                      { icon: <FavoriteBorderIcon fontSize="large" />, text: "add to wishlist" },
-                      { icon: <CompareArrowsIcon fontSize="large" />, text: "add to compare" },
-                      { icon: <VisibilityIcon fontSize="large" />, text: "quick view" },
-                    ].map(({ icon, text }, idx) => (
+                    {[
+                      { icon: <FavoriteBorderIcon fontSize="large" />, text: "add to wishlist", onClick: () => addToWishlist(product._id, product.title, product.price, product.image1) },
+                      { icon: <CompareArrowsIcon fontSize="large" />, text: "add to compare" }, // Add comparison logic if needed
+                      { icon: <Link to={`/product/${product._id}`}><VisibilityIcon fontSize="large" /></Link>, text: "view" }, // Link for quick view
+                    ].map(({ icon, text, onClick }, idx) => (
                       <Box
                         key={idx}
                         sx={{
@@ -183,7 +188,7 @@ const ShopNow = () => {
                         >
                           {text}
                         </Typography>
-                        <IconButton className="icon-button" sx={{ fontSize: "large" }}>
+                        <IconButton className="icon-button" sx={{ fontSize: "large" }} onClick={onClick}>
                           {icon}
                         </IconButton>
                       </Box>
@@ -209,7 +214,10 @@ const ShopNow = () => {
                       "&:hover": { backgroundColor: "#a8001b" },
                     }}
                     startIcon={<ShoppingCartIcon />}
-                    onClick={() => handleAddToCart(product._id)} // Add onClick handler
+                    onClick={() => {
+                      console.log("Add to Cart clicked for product:", product._id); // Changed to product._id
+                      addToCart(product._id, product.title, product.price, product.image1); // Changed to product._id
+                    }}
                   >
                     Add to Cart
                   </Button>

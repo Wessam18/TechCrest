@@ -114,7 +114,7 @@ const HotDeal = () => {
                                     </div>
                                 </li>
                             </ul>
-                            <h2 className="text-uppercase">Hot Deal This Week</h2>
+                            <h2 className="text-uppercase">Hot Deal Today</h2>
                             {deal && (
                                 <p>{deal.title}</p>
                             )}
