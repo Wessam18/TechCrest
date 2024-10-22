@@ -17,19 +17,19 @@ import "../styles/Header.css"; // Link to your CSS file
 
 const BrandShowcase = () => {
   const brands = [
-    { src: infinix, alt: 'infinix', route: '/products/infinix' },
-    { src: msi, alt: 'MSI', route: '/products/msi' },
-    { src: huawei, alt: 'Huawei', route: '/products/huawei' },
-    { src: asus, alt: 'Asus', route: '/products/asus' },
-    { src: lenovo, alt: 'Lenovo', route: '/products/lenovo' },
-    { src: honor, alt: 'Honor', route: '/products/honor' },
-    { src: hp, alt: 'HP', route: '/products/hp' },
-    { src: samsung, alt: 'Samsung', route: '/products/samsung' },
-    { src: anker, alt: 'anker', route: '/products/anker' },
-    { src: canon, alt: 'Canon', route: '/products/canon' },
-    { src: xiamoi, alt: 'Xiaomi', route: '/products/xiaomi' }, // Corrected name
-    { src: dell, alt: 'Dell', route: '/products/dell' },
-    { src: apple, alt: 'Apple', route: '/products/apple' },
+    { src: infinix, alt: 'Infinix', route: '/products/brand/infinix' },
+    { src: msi, alt: 'MSI', route: '/products/brand/msi' },
+    { src: huawei, alt: 'Huawei', route: '/products/brand/huawei' },
+    { src: asus, alt: 'Asus', route: '/products/brand/asus' },
+    { src: lenovo, alt: 'Lenovo', route: '/products/brand/lenovo' },
+    { src: honor, alt: 'Honor', route: '/products/brand/honor' },
+    { src: hp, alt: 'HP', route: '/products/brand/hp' },
+    { src: samsung, alt: 'Samsung', route: '/products/brand/samsung' },
+    { src: anker, alt: 'Anker', route: '/products/brand/anker' },
+    { src: canon, alt: 'Canon', route: '/products/brand/canon' },
+    { src: xiamoi, alt: 'Xiaomi', route: '/products/brand/xiaomi' },
+    { src: dell, alt: 'Dell', route: '/products/brand/dell' },
+    { src: apple, alt: 'Apple', route: '/products/brand/apple' },
   ];
 
   return (

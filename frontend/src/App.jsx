@@ -38,6 +38,7 @@ const App = () => {
                   <Route path="laptop" element={<LaptopPage />} />
                   <Route path="mobile" element={<MobilePage />} />
                   <Route path="tablet" element={<TabletPage />} />
+                  <Route path="/products/brand/:brandName" element={<BrandProducts />} /> {/* Brand products route */}
                   <Route path="/product/:productId" element={<SingleProductPage />} /> {/* Add SingleProductPage route */}
                   <Route element={<ProtectedRoute />}>
                     <Route path="/cart" element={<CartPage />} />

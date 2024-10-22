@@ -10,6 +10,15 @@ import { wishlistContext } from "../context/wishlistContext";
 
 const SingleProductPage = () => {
   const { productId } = useParams();
+
+  // Debugging: Check the productId
+  console.log("Product ID:", productId);
+
+  // Check if productId is valid
+  if (!productId) {
+    return <Typography>Product ID is not defined.</Typography>;
+  }
+
   const [selectedProduct, setSelectedProduct] = useState(null);
   const { addToCart } = useContext(cartContext);
 

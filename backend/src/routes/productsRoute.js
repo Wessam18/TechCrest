@@ -25,6 +25,23 @@ router.get("/category/:type", async (req, res) => {
 });
 
 
+// Fetch products by brand
+router.get("/brand/:brand", async (req, res) => {
+  const brandName = req.params.brand; // Extract the brand name from the URL parameter
+  try {
+    const products = await productsModel.find({ brand: brandName }); // Query by brand
+    if (products.length === 0) {
+      return res.status(404).json({ message: `No products found for brand: ${brandName}` });
+    }
+    res.status(200).json(products);
+  } catch (error) {
+    console.error(`Error fetching products for brand ${brandName}:`, error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
+
 
 
 router.get("/", async (req, res) => {

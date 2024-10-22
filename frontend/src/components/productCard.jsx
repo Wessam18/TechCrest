@@ -101,7 +101,17 @@ export default function ProductCard({ _id, title, image1, price, type }) {
             }}
           >
             {/* Icon buttons */}
-            {[{ icon: <FavoriteBorderIcon fontSize="large" />, text: "Add to wishlist", action: () => addToWishlist(_id, title, price, image1) }, { icon: <CompareArrowsIcon fontSize="large" />, text: "Add to compare" }, { icon: <VisibilityIcon fontSize="large" />, text: "view" }].map(({ icon, text, action }, idx) => (
+            {[{ icon: <FavoriteBorderIcon fontSize="large" />, text: "Add to wishlist", action: () => addToWishlist(_id, title, price, image1) }, 
+              { 
+                icon: <CompareArrowsIcon fontSize="large" />, 
+                text: "Add to compare", 
+                action: () => console.log("Compare clicked for product:", _id) // Action for compare button
+              },
+              { 
+                icon: <VisibilityIcon fontSize="large" />, 
+                text: "View", 
+                action: null // We will handle this in the Link below
+              }].map(({ icon, text, action }, idx) => (
               <Box
                 key={idx}
                 sx={{
@@ -136,13 +146,24 @@ export default function ProductCard({ _id, title, image1, price, type }) {
                 >
                   {text}
                 </Typography>
-                <IconButton 
-                  className="icon-button" 
-                  sx={{ fontSize: "large" }} 
-                  onClick={action} // Call the action when the icon button is clicked
-                >
-                  {icon}
-                </IconButton>
+                {text === "View" ? (
+                  <Link to={`/product/${_id}`}>
+                    <IconButton 
+                      className="icon-button" 
+                      sx={{ fontSize: "large" }} 
+                    >
+                      {icon}
+                    </IconButton>
+                  </Link>
+                ) : (
+                  <IconButton 
+                    className="icon-button" 
+                    sx={{ fontSize: "large" }} 
+                    onClick={action} // Call the action when the icon button is clicked for other icons
+                  >
+                    {icon}
+                  </IconButton>
+                )}
               </Box>
             ))}
           </Box>

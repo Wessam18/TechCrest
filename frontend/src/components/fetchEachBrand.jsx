@@ -6,7 +6,7 @@ import ProductCard from "../components/productCard.jsx";
 import { Box } from "@mui/material";
 
 const BrandProducts = () => {
-  const { brandName } = useParams(); // Removed type annotation
+  const { brandName } = useParams(); // Get brand name from URL
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,17 +14,13 @@ const BrandProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:5000/products"); // Replace with the correct API URL
+        const response = await fetch(`http://localhost:5000/products/brand/${brandName}`); // Updated URL to fetch by brand
         if (!response.ok) {
           throw new Error("Failed to fetch products.");
         }
         const data = await response.json();
 
-        const filteredProducts = data.filter(
-          (product) => product.brand && product.brand.toLowerCase() === brandName.toLowerCase()
-        );
-
-        setProducts(filteredProducts);
+        setProducts(data); // No need to filter since API already filters by brand
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -51,9 +47,11 @@ const BrandProducts = () => {
           products.map((product) => (
             <Grid item md={4} key={product._id}>
               <ProductCard
+                _id={product._id} // Ensure you're passing the _id here
                 image1={product.image1}
                 title={product.title}
                 price={product.price}
+                type={product.type} // Don't forget to pass the type if needed
               />
             </Grid>
           ))
