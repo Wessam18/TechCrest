@@ -5,16 +5,17 @@ export const getAllProducts = async() => {
     return await productsModel.find()
 }
 
-export const getAllProductsById = async (id) => {
+export const getAllProductsById = async (req, res) => {
   try {
-      const product = await productsModel.findById(id);
-      if (!product) {
-          return null; // Return null if the product is not found
-      }
-      return product;  // Return the product data
+    const { id } = req.params;
+    const product = await productsModel.findOne({ _id: id });
+    if (!product) {
+      return null; // Return null if the product is not found
+    }
+    res.status(201).json(product); // Return the product data
   } catch (error) {
-      console.error("Error fetching product by ID:", error);
-      throw new Error("Database error");  // Throw an error to be caught in the route
+    console.error("Error fetching product by ID:", error);
+    throw new Error("Database error"); // Throw an error to be caught in the route
   }
 };
 

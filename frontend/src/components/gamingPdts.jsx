@@ -14,7 +14,7 @@ const GamingPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/gaming');
+        const response = await fetch('http://localhost:5000/products/category/gaming');
         const data = await response.json();
         setProducts(data);
       } catch {

@@ -1,18 +1,31 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { SingleProductContext } from "../context/SingleProductContext";
 import { Box, Typography, Card, CardMedia, CardContent } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Button from '@mui/material/Button';
+import axios from "axios";
+import { useContext } from "react";
 import { cartContext } from "../context/cartContext";
 
 const SingleProductPage = () => {
   const { productId } = useParams(); // Get the product ID from the URL
-  const { selectedProduct, fetchProductById } = useContext(SingleProductContext);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const { addToCart } = useContext(cartContext); // Use cart context to add product to cart
 
   useEffect(() => {
-    fetchProductById(productId); // Fetch the product when the component mounts
+    const fetchProductById = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/products/${productId}`);
+        setSelectedProduct(response.data);
+      } catch (error) {
+        console.error("Failed to fetch product", error);
+      }
+    };
+
+    fetchProductById(); // Fetch the product when the component mounts
+    return () => {
+      setSelectedProduct(null); // Clear the product when leaving the page
+    };
   }, [productId]);
 
   if (!selectedProduct) {

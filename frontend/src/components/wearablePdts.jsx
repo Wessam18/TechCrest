@@ -14,7 +14,7 @@ const WearablePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/wearable');
+        const response = await fetch('http://localhost:5000/products/category/wearable');
         const data = await response.json();
         console.log(data)
         setProducts(data);

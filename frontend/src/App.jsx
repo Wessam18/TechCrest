@@ -23,7 +23,6 @@ import AuthProvider from "./context/AuthContext.jsx";
 import CartProvider from "./context/cartContext.jsx";
 import WishlistProvider from "./context/wishlistContext.jsx";
 import SingleProductPage from "./pages/SingleProductPage"; // Import SingleProductPage
-import SingleProductProvider from "./context/SingleProductContext"; // Import the provider
 import Checkout from "./pages/CheckoutPage.jsx";
 
 
@@ -32,7 +31,6 @@ const App = () => {
     <AuthProvider>
       <CartProvider>
         <WishlistProvider>
-          <SingleProductProvider>
           <Router>
             <Routes>
                 <Route path="/" element={<Layout />}>
@@ -60,7 +58,6 @@ const App = () => {
                 </Route>
             </Routes>
           </Router>
-          </SingleProductProvider>
         </WishlistProvider>
       </CartProvider>
     </AuthProvider>

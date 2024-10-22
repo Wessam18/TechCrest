@@ -5,9 +5,6 @@ import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import React from 'react';
 
-
-
-
 const LaptopPage = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(false);
@@ -15,7 +12,7 @@ const LaptopPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/laptop');
+        const response = await fetch('http://localhost:5000/products/category/laptop'); // Updated endpoint
         const data = await response.json();
         setProducts(data);
       } catch {
@@ -26,8 +23,8 @@ const LaptopPage = () => {
     fetchData();
   }, []);
 
-  if(error) {
-    return <Box>Something went wrong, please try again!</Box>
+  if (error) {
+    return <Box>Something went wrong, please try again!</Box>;
   }
 
   return (

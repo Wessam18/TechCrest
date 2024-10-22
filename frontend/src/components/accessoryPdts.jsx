@@ -13,7 +13,7 @@ const AccessoriesPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/accessory');
+        const response = await fetch('http://localhost:5000/products/category/accessory');
         const data = await response.json();
         setProducts(data);
       } catch {
